@@ -1,4 +1,12 @@
 <?php
+/**
+ *
+ * ibmi-tools (https://github.com/fabiopellati/ibmi-tools)
+ *
+ * @link      https://github.com/fabiopellati/ibmi-tools
+ * @copyright Copyright (c) 2017-2017 Fabio Pellati (https://github.com/fabiopellati)
+ * @license   http://opensource.org/licenses/BSD-3-Clause BSD-3-Clause
+ */
 
 namespace IbmiTools;
 
@@ -10,7 +18,7 @@ use Zend\ServiceManager\Factory\InvokableFactory;
 return [
     ConfigAbstractFactory::class => [
         'IbmiTools\\PgmCall\\Listener\\SetToolkitInstanceDefaultListener' => [
-            'IbmiTools\\Toolkit\\Instance\\Default',
+            'IbmiTools\\ToolkitInstance\\Instance\\Default',
         ],
         'IbmiTools\\PgmCall\\Listener\\SetResultsetDefaultListener'       => [
             Resultset::class,
@@ -20,9 +28,7 @@ return [
         ],
     ],
     'ibmi-tools'                 => [
-        'toolkit'          => [
-            'instance' => [],
-        ],
+        'toolkit-instance' => [],
         'pgm-call-default' => [
             'listeners' => [
                 'IbmiTools\\PgmCall\\Listener\\SetToolkitListener'           => 'IbmiTools\\PgmCall\\Listener\\SetToolkitDefaultListener',
@@ -38,7 +44,7 @@ return [
             ],
         ],
         /**
-         * pgm-call place here every single call spec
+         * pgm-call place here every single pgm-call spec
          */
         'pgm-call'         => [],
     ],
@@ -47,7 +53,7 @@ return [
             ConfigAbstractFactory::class,
         ],
         'factories'        => [
-            'IbmiTools\\Toolkit\\Instance\\Default'             => 'IbmiTools\\Toolkit\\ToolkitInstanceFactory',
+            'IbmiTools\\ToolkitInstance\\Instance\\Default'     => 'IbmiTools\\ToolkitInstance\\ToolkitInstanceFactory',
             'IbmiTools\\PgmCall'                                => 'IbmiTools\\PgmCallActuatorFactory',
             'IbmiTools\\Listener\\CacheListener'                => InvokableFactory::class,
             'IbmiTools\\Listener\\PgmCallPrepareParamsListener' => InvokableFactory::class,
