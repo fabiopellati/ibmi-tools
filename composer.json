@@ -34,10 +34,7 @@
   "extra": {
     "zf": {
       "component": [
-        "ZF\\Rest",
-        "ZF\\ApiProblem",
-        "MessageExchangeEventManager",
-        "ApigilityTools"
+        "MessageExchangeEventManager"
       ]
     }
   },
