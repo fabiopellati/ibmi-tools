@@ -1,6 +1,6 @@
 {
-  "name": "fabiopellati/apigility-tools",
-  "description": "",
+  "name": "fabiopellati/ibmi-tools",
+  "description": "IbmiToolkit's event-driven implementations based on MessageExchangeEventManager Actuator",
   "license": "BSD-3-Clause",
   "authors": [
     {
