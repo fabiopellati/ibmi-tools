@@ -65,7 +65,7 @@ class ToolkitInstanceFactory
             !isset($config['ibmi-tools']['toolkit-instance'][$requestedName]['user']) ||
             !isset($config['ibmi-tools']['toolkit-instance'][$requestedName]['password'])
         ) {
-            throw new ServiceNotCreatedException('Toolkit Configuration\'s  instance missed');
+            throw new ServiceNotCreatedException(vsprintf('%s configuration missed', $requestedName));
         }
         $config_instance = $config['ibmi-tools']['toolkit-instance'][$requestedName];
         if (!isset($config_instance['transport'])) {

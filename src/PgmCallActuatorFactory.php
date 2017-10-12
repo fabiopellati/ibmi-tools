@@ -41,8 +41,18 @@ class PgmCallActuatorFactory
         $actuator->setEvent($this->getEvent());
         $actuator->getEvent()->getRequest()->getParameters()->set('requestedName', $requestedName);
         $actuator->getEvent()->getRequest()->getParameters()->set('pgmCallSpec', $pgmCallSpec);
-        $actuatorAttachListenerListener = new ActuatorListenersAttacherListener($container);
-        $actuatorAttachListenerListener->attach($actuator->getEventManager());
+        $listeners = $pgmCallSpec['listeners'];
+        /**
+         * load listeners
+         */
+        foreach ($listeners as $listenerClass) {
+            $listener = $container->get($listenerClass);
+            if (method_exists($listener, 'setEventManager')) {
+                $listener->setEventManager($actuator->getEventManager());
+            }
+            $listener->attach($actuator->getEventManager());
+
+        }
 
         return $actuator;
 

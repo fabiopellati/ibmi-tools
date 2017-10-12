@@ -18,7 +18,7 @@ use Zend\ServiceManager\Factory\InvokableFactory;
 return [
     ConfigAbstractFactory::class => [
         'IbmiTools\\PgmCall\\Listener\\SetToolkitInstanceDefaultListener' => [
-            'IbmiTools\\ToolkitInstance\\Instance\\Default',
+            'IbmiTools\\ToolkitInstance\\Default',
         ],
         'IbmiTools\\PgmCall\\Listener\\SetResultsetDefaultListener'       => [
             Resultset::class,
@@ -28,10 +28,16 @@ return [
         ],
     ],
     'ibmi-tools'                 => [
-        'toolkit-instance' => [],
+        'toolkit-instance' => [
+            'IbmiTools\\ToolkitInstance\\Default' => [
+                'database' => '*LOCAL',
+                'user'     => '',
+                'password' => '',
+            ],
+        ],
         'pgm-call-default' => [
             'listeners' => [
-                'IbmiTools\\PgmCall\\Listener\\SetToolkitListener'           => 'IbmiTools\\PgmCall\\Listener\\SetToolkitDefaultListener',
+                'IbmiTools\\PgmCall\\Listener\\SetToolkitListener'           => 'IbmiTools\\PgmCall\\Listener\\SetToolkitInstanceDefaultListener',
                 'IbmiTools\\PgmCall\\Listener\\SetResultsetListener'         => 'IbmiTools\\PgmCall\\Listener\\SetResultsetDefaultListener',
                 'IbmiTools\\PgmCall\\Listener\\SetHydratorListener'          => 'IbmiTools\\PgmCall\\Listener\\SetHydratorDefaultListener',
                 'IbmiTools\\PgmCall\\Listener\\PgmCallPrepareParamsListener' => 'IbmiTools\\PgmCall\\Listener\\PgmCallPrepareParamsListener',
@@ -49,11 +55,11 @@ return [
         'pgm-call'         => [],
     ],
     'service_manager'            => [
-        'abstract-factory' => [
+        'abstract_factories' => [
             ConfigAbstractFactory::class,
         ],
-        'factories'        => [
-            'IbmiTools\\ToolkitInstance\\Instance\\Default'     => 'IbmiTools\\ToolkitInstance\\ToolkitInstanceFactory',
+        'factories'          => [
+            'IbmiTools\\ToolkitInstance\\Default'               => 'IbmiTools\\ToolkitInstance\\ToolkitInstanceFactory',
             'IbmiTools\\PgmCall'                                => 'IbmiTools\\PgmCallActuatorFactory',
             'IbmiTools\\Listener\\CacheListener'                => InvokableFactory::class,
             'IbmiTools\\Listener\\PgmCallPrepareParamsListener' => InvokableFactory::class,
