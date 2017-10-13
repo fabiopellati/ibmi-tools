@@ -14,6 +14,7 @@ use MessageExchangeEventManager\Resultset\Resultset;
 use MessageExchangeEventManager\Resultset\ResultsetHydrator;
 use Zend\ServiceManager\AbstractFactory\ConfigAbstractFactory;
 use Zend\ServiceManager\Factory\InvokableFactory;
+use Zend\Validator\ValidatorChain;
 
 return [
     ConfigAbstractFactory::class => [
@@ -26,6 +27,12 @@ return [
         'IbmiTools\\PgmCall\\Listener\\SetHydratorDefaultListener'        => [
             ResultsetHydrator::class,
         ],
+        'IbmiTools\\PgmCall\\Listener\\ValidatorErrorListener'            => [
+            ValidatorChain::class,
+        ],
+        'IbmiTools\\PgmCall\\Listener\\CacheListener'                     => [
+            ValidatorChain::class,
+        ],
     ],
     'ibmi-tools'                 => [
         'toolkit-instance' => [
@@ -37,14 +44,14 @@ return [
         ],
         'pgm-call-default' => [
             'listeners' => [
-                'IbmiTools\\PgmCall\\Listener\\SetToolkitListener'           => 'IbmiTools\\PgmCall\\Listener\\SetToolkitInstanceDefaultListener',
-                'IbmiTools\\PgmCall\\Listener\\SetResultsetListener'         => 'IbmiTools\\PgmCall\\Listener\\SetResultsetDefaultListener',
-                'IbmiTools\\PgmCall\\Listener\\SetHydratorListener'          => 'IbmiTools\\PgmCall\\Listener\\SetHydratorDefaultListener',
-                'IbmiTools\\PgmCall\\Listener\\PgmCallPrepareParamsListener' => 'IbmiTools\\PgmCall\\Listener\\PgmCallPrepareParamsListener',
-                'IbmiTools\\PgmCall\\Listener\\PgmCallAddLibrariesListener'  => 'IbmiTools\\PgmCall\\Listener\\PgmCallAddLibrariesListener',
-                'IbmiTools\\PgmCall\\Listener\\PgmCallListener'              => 'IbmiTools\\PgmCall\\Listener\\PgmCallListener',
-                'IbmiTools\\PgmCall\\Listener\\PgmCallErrorListener'         => 'IbmiTools\\PgmCall\\Listener\\PgmCallErrorListener',
-                'IbmiTools\\PgmCall\\Listener\\PgmCallHydrateListener'       => 'IbmiTools\\PgmCall\\Listener\\PgmCallHydrateListener',
+                'IbmiTools\\PgmCall\\Listener\\SetToolkitListener'    => 'IbmiTools\\PgmCall\\Listener\\SetToolkitInstanceDefaultListener',
+                'IbmiTools\\PgmCall\\Listener\\SetResultsetListener'  => 'IbmiTools\\PgmCall\\Listener\\SetResultsetDefaultListener',
+                'IbmiTools\\PgmCall\\Listener\\SetHydratorListener'   => 'IbmiTools\\PgmCall\\Listener\\SetHydratorDefaultListener',
+                'IbmiTools\\PgmCall\\Listener\\PrepareParamsListener' => 'IbmiTools\\PgmCall\\Listener\\PrepareParamsListener',
+                'IbmiTools\\PgmCall\\Listener\\AddLibrariesListener'  => 'IbmiTools\\PgmCall\\Listener\\AddLibrariesListener',
+                'IbmiTools\\PgmCall\\Listener\\PgmCallListener'       => 'IbmiTools\\PgmCall\\Listener\\PgmCallListener',
+                'IbmiTools\\PgmCall\\Listener\\ErrorListener'         => 'IbmiTools\\PgmCall\\Listener\\ErrorListener',
+                'IbmiTools\\PgmCall\\Listener\\HydrateResultListener' => 'IbmiTools\\PgmCall\\Listener\\HydrateResultListener',
             ],
             'params'    => [
             ],
@@ -59,14 +66,14 @@ return [
             ConfigAbstractFactory::class,
         ],
         'factories'          => [
-            'IbmiTools\\ToolkitInstance\\Default'               => 'IbmiTools\\ToolkitInstance\\ToolkitInstanceFactory',
-            'IbmiTools\\PgmCall'                                => 'IbmiTools\\PgmCallActuatorFactory',
-            'IbmiTools\\Listener\\CacheListener'                => InvokableFactory::class,
-            'IbmiTools\\Listener\\PgmCallPrepareParamsListener' => InvokableFactory::class,
-            'IbmiTools\\Listener\\PgmCallAddLibrariesListener'  => InvokableFactory::class,
-            'IbmiTools\\Listener\\PgmCallListener'              => InvokableFactory::class,
-            'IbmiTools\\Listener\\PgmCallErrorListener'         => InvokableFactory::class,
-            'IbmiTools\\Listener\\PgmCallHydrateListener'       => InvokableFactory::class,
+            'IbmiTools\\ToolkitInstance\\Default'                 => 'IbmiTools\\ToolkitInstance\\ToolkitInstanceFactory',
+            'IbmiTools\\PgmCall'                                  => 'IbmiTools\\PgmCallActuatorFactory',
+            'IbmiTools\\PgmCall\\Listener\\CacheListener'         => InvokableFactory::class,
+            'IbmiTools\\PgmCall\\Listener\\PrepareParamsListener' => InvokableFactory::class,
+            'IbmiTools\\PgmCall\\Listener\\AddLibrariesListener'  => InvokableFactory::class,
+            'IbmiTools\\PgmCall\\Listener\\PgmCallListener'       => InvokableFactory::class,
+            'IbmiTools\\PgmCall\\Listener\\ErrorListener'         => InvokableFactory::class,
+            'IbmiTools\\PgmCall\\Listener\\HydrateResultListener' => InvokableFactory::class,
         ],
     ],
 ];
