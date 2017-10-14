@@ -52,11 +52,12 @@ class PrepareParamsListener
         $request = $e->getRequest();
         $response = $e->getResponse();
         try {
+            $actuatorRunOptions = $request->getParameters()->get('actuatorRunOptions');
             $toolkitInstance = $request->getParameters()->get('toolkitInstance');
             $pgmCallSpec = $request->getParameters()->get('pgmCallSpec');
             $inputParams = [];
             foreach ($pgmCallSpec['params'] as $key => $param) {
-                $value = $this->getParamValue($request, $key, $param);
+                $value = $this->getParamValue($actuatorRunOptions, $key, $param);
                 try {
                     $this->prepareParam($param, $value, $toolkitInstance, $inputParams);
                 } catch (\Exception $error) {
@@ -64,8 +65,7 @@ class PrepareParamsListener
                     $e->stopPropagation();
                 }
             }
-            $e->getRequest()->getParameters()->set('inputParams', $inputParams);
-            $request->getParameters()->set('hydrator', $this->hydrator);
+            $request->getParameters()->set('inputParams', $inputParams);
         } catch (\Exception $error) {
             $response->setContent($error);
             $e->stopPropagation();
@@ -214,20 +214,20 @@ class PrepareParamsListener
      * cerca il valore del parametro nei parametri della richiesta
      * se non lo trova tenta di recuperarlo da eventuali alias configurati nello spec del parametro
      *
-     * @param $request
+     * @param $actuatorRunOptions
      * @param $key
      *
      * @return mixed
      */
-    protected function getParamValue($request, $key, $param)
+    protected function getParamValue($actuatorRunOptions, $key, $param)
     {
-        $value = $request->getParameters()->get($key);
+        $value = $actuatorRunOptions[$key];
         if (empty($value)) {
-            $value = $request->getParameters()->get(strtolower($key));
+            $value = $actuatorRunOptions[strtolower($key)];
         }
         if (empty($value) && array_key_exists('alias', $param)) {
             foreach ($param['alias'] as $alias) {
-                $value = $request->getParameters()->get($alias);
+                $value = $actuatorRunOptions[$alias];
                 if (!empty($value)) {
                     break;
                 }

@@ -1,0 +1,67 @@
+<?php
+
+return [
+    'service_manager' => [
+        'factories' => [
+            'Application\\MyPngCallExample'          => 'IbmiTools\\PgmCallActuatorFactory',
+            'IbmiTools\\Toolkit\\Instance\\Default' => 'IbmiTools\\Toolkit\\ToolkitInstanceFactory',
+                    ]
+    ],
+    'example'=>[
+        'Example\\PgmCall\\Listener\\PgmCallContentErrorListener'=>[
+            'param-error-code'    => 'FLGERR',
+            'param-error-message' => 'TXTERR',
+        ]
+    ],
+    'ibmi-tools' => [
+        'default' => [
+            'listeners'=>[
+
+            ],
+            'cache'=>'key_for_zend_cache',
+            'toolkit-instance'    => 'IbmiTools\Toolkit\Instance\Default',
+            'params'              => [
+                                    /**
+                                    * elenco di parametri template ripetitivi
+                                    * se inseriti come nella sezione parametri del pgm-call possono essere richiamati inserendo
+                                    * in pgm-call/params la chiabve in questo modo
+                                    * 'nome_parametro'=>'chiave_parametro_default'
+                                    */
+                                    ]
+        ],
+        'toolkit' => [
+            'instance' => [
+                'IbmiTools\\Toolkit\\Instance\\Default' => [
+                    'database' => '*LOCAL',
+                    'user'     => 'QPGMR',
+                    'password' => ''
+
+                ]
+            ],
+        ],
+        'pgm-call' => [
+            'Application\\MyPngCallExample' => [
+                'toolkit-instance'    => 'IbmiTools\Toolkit\Instance\Default',
+                'resultset'           => 'IbmiTools\Resultset\Resultset',
+                'hydrator'            => 'IbmiTools\Resultset\ResultsetHydrator',
+                'library-name'        => 'W2WSTD_OBJ',
+                'program-name'        => 'VENU046',
+                'listeners'=>[
+
+                ],
+
+                'params' => [
+                    'CODAZI' => [
+                        'name'    => 'CODAZI',
+                        'alias'   =>[],
+                        'type'    => '3',
+                        'comemnt' => 'Codice azienda STD o GEC o STD',
+                        'io'      => 'I'
+                    ]
+                    ...
+                ]
+            ]
+        ]
+    ]
+
+];

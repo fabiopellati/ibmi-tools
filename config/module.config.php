@@ -30,9 +30,9 @@ return [
         'IbmiTools\\PgmCall\\Listener\\ValidatorErrorListener'            => [
             ValidatorChain::class,
         ],
-        'IbmiTools\\PgmCall\\Listener\\CacheListener'                     => [
-            ValidatorChain::class,
-        ],
+        //        'IbmiTools\\PgmCall\\Listener\\CacheListener'                     => [
+        //            ValidatorChain::class,
+        //        ],
     ],
     'ibmi-tools'                 => [
         'toolkit-instance' => [
@@ -68,7 +68,7 @@ return [
         'factories'          => [
             'IbmiTools\\ToolkitInstance\\Default'                 => 'IbmiTools\\ToolkitInstance\\ToolkitInstanceFactory',
             'IbmiTools\\PgmCall'                                  => 'IbmiTools\\PgmCallActuatorFactory',
-            'IbmiTools\\PgmCall\\Listener\\CacheListener'         => InvokableFactory::class,
+            //            'IbmiTools\\PgmCall\\Listener\\CacheListener'         => InvokableFactory::class,
             'IbmiTools\\PgmCall\\Listener\\PrepareParamsListener' => InvokableFactory::class,
             'IbmiTools\\PgmCall\\Listener\\AddLibrariesListener'  => InvokableFactory::class,
             'IbmiTools\\PgmCall\\Listener\\PgmCallListener'       => InvokableFactory::class,

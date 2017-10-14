@@ -17,6 +17,15 @@ class FakeToolkitInstance
 {
     public static $fakeLog = [];
 
+    public function pgmCall($pgmName, $lib, $inputParam = null, $returnParam = null, $options = null)
+    {
+        self::$fakeLog[] = [__METHOD__, func_get_args()];
+        print_r([__METHOD__ => __LINE__, self::$fakeLog]);
+        exit;
+
+        return [__CLASS__, __METHOD__];
+    }
+
     static function AddParameterChar($io, $size, $comment, $varName = '', $value = '', $varying = 'off', $dimension = 0,
                                      $by = '', $isArray = false, $ccsidBefore = '', $ccsidAfter = '', $useHex = false)
     {
