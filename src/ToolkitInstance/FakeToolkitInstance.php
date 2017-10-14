@@ -90,7 +90,7 @@ class FakeToolkitInstance
     {
         self::$fakeLog[] = [__METHOD__, func_get_args()];
 
-        return ['fakeToolkit ', __METHOD__];
+        return 'fakeToolkit ' . __METHOD__;
 
     }
 
