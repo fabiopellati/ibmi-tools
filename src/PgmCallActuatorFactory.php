@@ -11,7 +11,6 @@
 namespace IbmiTools;
 
 use IbmiTools\Exception\InvalidParamException;
-use IbmiTools\PgmCall\Listener\ActuatorListenersAttacherListener;
 use Interop\Container\ContainerInterface;
 use MessageExchangeEventManager\Actuator\Actuator;
 use MessageExchangeEventManager\Event\Event;
