@@ -52,7 +52,7 @@ class AddLibrariesListener
         try {
             $toolkitInstance = $request->getParameters()->get('toolkitInstance');
             $pgmCallSpec = $request->getParameters()->get('pgmCallSpec');
-            $lib = $request->getParameters()->get('lib');
+            $lib = $pgmCallSpec['library-name'];
             $usrlibl = $toolkitInstance->ClCommandWithOutput('RTVJOBA USRLIBL(?)');
             $usrlibl_array = explode(' ', $usrlibl['USRLIBL']);
             if (!in_array($lib, $usrlibl_array)) {
