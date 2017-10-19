@@ -14,7 +14,6 @@ use MessageExchangeEventManager\Resultset\Resultset;
 use MessageExchangeEventManager\Resultset\ResultsetHydrator;
 use Zend\ServiceManager\AbstractFactory\ConfigAbstractFactory;
 use Zend\ServiceManager\Factory\InvokableFactory;
-use Zend\Validator\ValidatorChain;
 
 return [
     ConfigAbstractFactory::class => [
@@ -28,7 +27,6 @@ return [
             ResultsetHydrator::class,
         ],
         'IbmiTools\\PgmCall\\Listener\\ValidatorErrorListener'            => [
-            ValidatorChain::class,
         ],
         //        'IbmiTools\\PgmCall\\Listener\\CacheListener'                     => [
         //            ValidatorChain::class,
