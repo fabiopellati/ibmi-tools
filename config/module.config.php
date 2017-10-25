@@ -28,9 +28,8 @@ return [
         ],
         'IbmiTools\\PgmCall\\Listener\\ValidatorErrorListener'            => [
         ],
-        //        'IbmiTools\\PgmCall\\Listener\\CacheListener'                     => [
-        //            ValidatorChain::class,
-        //        ],
+        'IbmiTools\\PgmCall\\Listener\\CacheListener'                     => [
+        ],
     ],
     'ibmi-tools'                 => [
         'toolkit-instance' => [
