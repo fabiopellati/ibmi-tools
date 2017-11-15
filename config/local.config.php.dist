@@ -1,0 +1,16 @@
+<?php
+
+return [
+    'service_manager' => [
+        'factories' => [
+            /**
+             * in ambiente locale il toolkit ibm_db2 non è normalmente disponibile
+             * in questi casi sovrascrivere la chiave del toolkit per consentire ad apigility di caricare comunque le risorse o le rpc
+             * per poter configurare gli endpoint delle api utilizzando l'interfaccia di amministrazione di apigility
+             */
+            'IbmiTools\\ToolkitInstance\\Default' => 'IbmiTools\\Toolkit\\FakeToolkitInstanceFactory',
+        ]
+    ],
+
+
+];
