@@ -8,7 +8,7 @@
       "email": "fabio.pellati@gmail.com"
     }
   ],
-  "minimum-stability": "dev",
+  "minimum-stability": "stable",
   "prefer-stable":true,
   "require": {
     "zendframework/zend-servicemanager": "^3.3",
@@ -19,7 +19,7 @@
     "zendframework/zend-hydrator": "^2.2",
     "zendframework/zend-http": "^2.6",
     "zendtech/ibmitoolkit": "^1.7",
-    "fabiopellati/message-exchange-event-manager": "^2"
+    "fabiopellati/message-exchange-event-manager": "^2.3"
   },
   "autoload": {
     "psr-4": {
