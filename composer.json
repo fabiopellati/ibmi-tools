@@ -19,7 +19,7 @@
     "zendframework/zend-hydrator": "^2.2",
     "zendframework/zend-http": "^2.6",
     "zendtech/ibmitoolkit": "^1.7",
-    "fabiopellati/message-exchange-event-manager": "^2.3"
+    "fabiopellati/message-exchange-event-manager": "^2.3 || dev-develop"
   },
   "autoload": {
     "psr-4": {
