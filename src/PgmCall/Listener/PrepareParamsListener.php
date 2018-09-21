@@ -103,9 +103,9 @@ class PrepareParamsListener
                                                                      $comment, $name, $value);
                 return true;
             }
-            $is_size = $this->paramSize($param);
-            if (is_array($is_size)) {
-                $paramsIn[] = $toolkit_instance->AddParameterSize($io, $is_size[0], $is_size[1],
+            $is_zoned = $this->paramZoned($param);
+            if (is_array($is_zoned)) {
+                $paramsIn[] = $toolkit_instance->AddParameterZoned($io, $is_zoned[0], $is_zoned[1],
                                                                   $comment, $name, $value);
 
                 return true;
@@ -175,7 +175,7 @@ class PrepareParamsListener
      *
      * @return bool|array
      */
-    protected function paramSize($param)
+    protected function paramZoned($param)
     {
         $patterns = [
             '#^([1-9]{1}[0-9]{0,4})(S)(,|\s)([0-9]{1,4})$#',
