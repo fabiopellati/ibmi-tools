@@ -4,7 +4,7 @@
  * ibmi-tools (https://github.com/fabiopellati/ibmi-tools)
  *
  * @link      https://github.com/fabiopellati/ibmi-tools
- * @copyright Copyright (c) 2017-2017 Fabio Pellati (https://github.com/fabiopellati)
+ * @copyright Copyright (c) 2017-2018 Fabio Pellati (https://github.com/fabiopellati)
  * @license   http://opensource.org/licenses/BSD-3-Clause BSD-3-Clause
  */
 
@@ -101,6 +101,12 @@ class PrepareParamsListener
             if (is_array($is_pack_dec)) {
                 $paramsIn[] = $toolkit_instance->AddParameterPackDec($io, $is_pack_dec[0], $is_pack_dec[1],
                                                                      $comment, $name, $value);
+                return true;
+            }
+            $is_size = $this->paramSize($param);
+            if (is_array($is_size)) {
+                $paramsIn[] = $toolkit_instance->AddParamSize($io, $is_size[0], $is_size[1],
+                                                              $comment, $name, $value);
 
                 return true;
             }
@@ -146,8 +152,33 @@ class PrepareParamsListener
     protected function paramPackDec($param)
     {
         $patterns = [
-            '#^([1-9]{1}[0-9]{0,4})(,|\s)([0-9]{1,4})$#',
             '#^([1-9]{1}[0-9]{0,4})(P)(,|\s)([0-9]{1,4})$#',
+        ];
+        $match = $this->paramCheckPatterns($param, $patterns);
+        if (is_array($match)) {
+
+            switch ($match['index']) {
+                case 0:
+                    return [$match['match'][1], $match['match'][3]];
+                    break;
+                case 1:
+                    return [$match['match'][1], $match['match'][4]];
+                    break;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * @param $param
+     *
+     * @return bool|array
+     */
+    protected function paramSize($param)
+    {
+        $patterns = [
+            '#^([1-9]{1}[0-9]{0,4})(S)(,|\s)([0-9]{1,4})$#',
         ];
         $match = $this->paramCheckPatterns($param, $patterns);
         if (is_array($match)) {
