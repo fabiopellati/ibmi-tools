@@ -105,8 +105,8 @@ class PrepareParamsListener
             }
             $is_size = $this->paramSize($param);
             if (is_array($is_size)) {
-                $paramsIn[] = $toolkit_instance->AddParamSize($io, $is_size[0], $is_size[1],
-                                                              $comment, $name, $value);
+                $paramsIn[] = $toolkit_instance->AddParameterSize($io, $is_size[0], $is_size[1],
+                                                                  $comment, $name, $value);
 
                 return true;
             }
